@@ -6,7 +6,7 @@
    * @type {Object}
    */
   window.SB.config = {
-    DUID: 'real'
+    DUID: 'real',
+    DUIDSettings: ''
   }
-
 })();

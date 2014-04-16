@@ -6,11 +6,13 @@
   /**
    * Player constructor
    * @param {Object} plugin Native plugin api
-   * @param {Object} config Config player
+   * @param {Object} [config] - Config player
    * @constructor
    */
   var Player = function(plugin, config) {
+    config = config || {};
     SB.extend(this._plugin, plugin);
+    this._plugin.$P = this;
     SB.extend(this.config, config);
     this.init();
   };
@@ -41,7 +43,13 @@
    */
   proto.config = {
     // default step for use in forward/backward methods
-    seekStep: 5
+    seekStep: 5,
+    size: {
+      width: 1280,
+      height: 720,
+      left: 0,
+      top: 0
+    }
   };
 
   /**
@@ -82,6 +90,7 @@
   proto.init = function () {
     if (!isInited) {
       this._plugin.init();
+      this.setSize(this.config.size);
       isInited = true;
     }
   };
@@ -268,6 +277,30 @@
     opt.top = opt.top || 0;
 
     this._plugin.setSize(opt);
+  };
+
+  proto.onReady = function () {
+    this.fire('ready');
+  };
+
+  proto.onBufferingStart = function () {
+    this.fire('bufferingBegin');
+  };
+
+  proto.onBufferingEnd = function () {
+    this.fire('bufferingEnd');
+  };
+
+  proto.onUpdate = function () {
+    this.fire('update');
+  };
+
+  proto.onComplete = function () {
+    this.fire('complete');
+  };
+
+  proto.onError = function () {
+    this.trigger('error');
   };
 
   // store Player constructor in SB

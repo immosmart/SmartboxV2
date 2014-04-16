@@ -23,8 +23,11 @@
     // no need anymore
     readyCallbacks = null;
 
-    window.SBDevice = SB.device;
-    window.SBStorage = SB.storage;
+    window.SBDevice = Smartbox.device;
+    window.SBStorage = Smartbox.storage;
+    if (Smartbox.player) {
+      window.SBPlayer = Smartbox.player;
+    }
   }
 
   //TODO: add own extend func
@@ -209,6 +212,8 @@
       document.body.appendChild($externalCssContainer);
     }
   };
+
+  Smartbox.extend = extend;
 
   // mix events to Smartbox
   extend(Smartbox, SBEvents.prototype);

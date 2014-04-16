@@ -35,7 +35,7 @@
        this.DUID = this.getLocalRandomDUID();
        break;*/
       default:
-        this.DUID = Config.DUIDSettings;
+        this.DUID = SB.config.DUIDSettings || '';
         break;
     }
 
