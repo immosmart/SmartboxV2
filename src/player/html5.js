@@ -13,9 +13,8 @@
     setEvents: function () {
       var self = this,
         $P = this.$P,
-        info = $P.videoInfo,
+        info = this.info,
         video = this.$video;
-
       $(video).on({
         'loadedmetadata': function () {
           info.width = video.videoWidth;
@@ -76,7 +75,10 @@
     }
   };
 
-  SB.readyForPlatform('default', function () {
+  function initPlayer() {
     SB.player = new SB._modules.Player(Plugin);
-  });
+  }
+
+  SB.readyForPlatform('default', initPlayer);
+  SB.readyForPlatform('philips', initPlayer);
 })();

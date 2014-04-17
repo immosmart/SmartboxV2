@@ -12,7 +12,9 @@
   var Player = function(plugin, config) {
     config = config || {};
     SB.extend(this._plugin, plugin);
+
     this._plugin.$P = this;
+    this._plugin.info = this.videoInfo;
     SB.extend(this.config, config);
     this.init();
   };
@@ -44,12 +46,15 @@
   proto.config = {
     // default step for use in forward/backward methods
     seekStep: 5,
+    // default size, will be set on each video
     size: {
       width: 1280,
       height: 720,
       left: 0,
       top: 0
-    }
+    },
+    // save video dimensions in video container
+    autosize: true
   };
 
   /**
@@ -99,7 +104,6 @@
    * Start playing video, or resume video from pause
    * @param {Object | String} options Options or video url
    * @param {String} options.url url of video
-   * @param {String} options.type video type hls/vod,  vod by default
    * @param {Number} options.from start video time, 0 by default
    *
    * @examples
@@ -114,8 +118,7 @@
    * }); // => runs video from 20 second
    *
    * Player.play({
-   *  url: "stream.m3u8",
-   *  type: "hls"
+   *  url: "stream.m3u8"
    * }); // => runs stream
    */
   proto.play = function (options) {
@@ -128,6 +131,7 @@
 
     if (options) {
       this.stop();
+      this.state = 'play';
       this._plugin.play(options);
     } else if (!options && this.state === 'pause') {
       this.resume();
@@ -281,6 +285,7 @@
 
   proto.onReady = function () {
     this.fire('ready');
+    this.setSize(this.config.size);
   };
 
   proto.onBufferingStart = function () {
@@ -297,6 +302,7 @@
 
   proto.onComplete = function () {
     this.fire('complete');
+    this.stop();
   };
 
   proto.onError = function () {

@@ -215,6 +215,12 @@
 
   Smartbox.extend = extend;
 
+  Smartbox.bind = function (cb,scope) {
+    return function () {
+      return cb.apply(scope, arguments);
+    }
+  };
+
   // mix events to Smartbox
   extend(Smartbox, SBEvents.prototype);
 

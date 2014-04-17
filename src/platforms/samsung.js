@@ -10,6 +10,7 @@
     pluginObjectNetwork: 'SAMSUNG-INFOLINK-NETWORK',
     pluginObjectNNavi: 'SAMSUNG-INFOLINK-NNAVI',
     pluginPlayer: 'SAMSUNG-INFOLINK-PLAYER',
+    sefPlayer: 'SAMSUNG-INFOLINK-SEF',
     EXTERNALWIDGET: 'SAMSUNG-INFOLINK-EXTERNALWIDGETINTERFACE'
   };
 
@@ -168,6 +169,7 @@
     this.pluginObjectNetwork = this.detectPlugin('pluginObjectNetwork', 'SAMSUNG-INFOLINK-NETWORK');
     this.pluginObjectNNavi = this.detectPlugin('pluginObjectNNavi', 'SAMSUNG-INFOLINK-NNAVI');
     this.pluginPlayer = this.detectPlugin('pluginPlayer', 'SAMSUNG-INFOLINK-PLAYER');
+    this.sefPlayer = this.detectPlugin('sefPlayer', 'SAMSUNG-INFOLINK-SEF');
     this.pluginSDI = this.detectPlugin('EXTERNALWIDGET', 'SAMSUNG-INFOLINK-EXTERNALWIDGETINTERFACE');
   };
 
