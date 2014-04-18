@@ -75,10 +75,7 @@
     }
   };
 
-  function initPlayer() {
+  SB.readyForPlatform('default', function () {
     SB.player = new SB._modules.Player(Plugin);
-  }
-
-  SB.readyForPlatform('default', initPlayer);
-  SB.readyForPlatform('philips', initPlayer);
+  });
 })();
